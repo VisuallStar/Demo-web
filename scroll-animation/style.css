@@ -1,0 +1,34 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #000;
+}
+
+.scroll-section {
+    height: 500vh; /* Adjust this value to change how much scrolling is needed to finish each animation */
+    position: relative;
+}
+
+.sticky-container {
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures the image fits the screen without zooming or cropping */
+}
+
+.spacer {
+    height: 60vh; /* A short blank space */
+    background-color: #000;
+    width: 100%;
+}
