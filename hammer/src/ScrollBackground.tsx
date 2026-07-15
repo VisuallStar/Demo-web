@@ -20,14 +20,14 @@ export default function ScrollBackground() {
     // Load Sequence 1
     for (let i = 1; i <= seq1Count; i++) {
       const img = new Image();
-      img.src = `/images/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
+      img.src = `./images/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
       images.push(img);
     }
     
     // Load Sequence 2
     for (let i = 1; i <= seq2Count; i++) {
       const img = new Image();
-      img.src = `/images2/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
+      img.src = `./images2/ezgif-frame-${i.toString().padStart(3, '0')}.jpg`;
       images.push(img);
     }
     

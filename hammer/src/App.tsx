@@ -211,7 +211,7 @@ export default function App() {
       </header>
 
       {/* HERO SECTION - REPLICA OF THE FIRST SLIDE GRID */}
-      <main className="max-w-7xl mx-auto px-6 pt-12 pb-24 font-sans" id="hero-section">
+      <main className="max-w-7xl mx-auto px-6 pt-12 pb-24 font-sans min-h-[120vh] flex flex-col justify-center" id="hero-section">
         
         {/* Outermost grid box with technical borders */}
         <div className="relative w-full" id="hero-grid-container">
@@ -405,7 +405,7 @@ export default function App() {
       </main>
 
       {/* PRICING SECTION */}
-      <section className="py-24 lg:py-48 min-h-[100vh] relative z-10 flex flex-col justify-center" id="pricing-section">
+      <section className="py-24 lg:py-48 min-h-[150vh] relative z-10 flex flex-col justify-center" id="pricing-section">
         <div className="max-w-7xl mx-auto px-6 w-full">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight text-white">Choose Your Tier</h2>
@@ -463,7 +463,7 @@ export default function App() {
       </section>
 
       {/* TESTIMONIALS SECTION - REPLICA OF THE SECOND SLIDE */}
-      <section className="bg-transparent border-t border-zinc-900 py-24" id="testimonials-section">
+      <section className="bg-transparent border-t border-white/10 py-24 min-h-[120vh] flex flex-col justify-center" id="testimonials-section">
         <div className="max-w-7xl mx-auto px-6">
           
           {/* Replica Grid of Slide 2 */}
