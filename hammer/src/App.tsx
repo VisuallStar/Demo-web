@@ -158,7 +158,7 @@ export default function App() {
       <ScrollBackground />
       <div className="relative z-10 w-full h-full">
       {/* HEADER SECTION */}
-      <header className="border-b border-white/10 bg-black/20 backdrop-blur-lg sticky top-0 z-50">
+      <header className="border-b border-white/10 bg-white/5 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           
           {/* Logo */}
@@ -296,7 +296,7 @@ export default function App() {
 
               {/* Live Canvas Waveform Container */}
               <div className="flex-1 flex flex-col items-center justify-center relative py-6">
-                <div className="w-full h-44 relative bg-black/20 backdrop-blur-md border border-white/10 rounded-xl overflow-hidden shadow-2xl">
+                <div className="w-full h-44 relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-xl overflow-hidden shadow-2xl">
                   <canvas 
                     ref={canvasRef} 
                     className="w-full h-full block cursor-pointer"
@@ -321,10 +321,10 @@ export default function App() {
                         setActiveProfile(profile);
                         setIsPlaying(true);
                       }}
-                      className={`py-2 px-1 text-center border transition-all duration-300 flex flex-col items-center justify-center space-y-1 rounded-lg backdrop-blur-sm ${
+                      className={`py-2 px-1 text-center border transition-all duration-300 flex flex-col items-center justify-center space-y-1 rounded-lg backdrop-blur-md ${
                         activeProfile.name === profile.name
                           ? "border-white/40 bg-white/10 shadow-lg"
-                          : "border-white/10 hover:border-white/30 bg-black/20"
+                          : "border-white/10 hover:border-white/30 bg-white/5"
                       }`}
                       style={{
                         borderTop: activeProfile.name === profile.name ? `2px solid ${profile.color}` : undefined
@@ -414,7 +414,7 @@ export default function App() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
             
             {/* Price Block 1 */}
-            <div className="bg-black/20 backdrop-blur-2xl border border-white/10 p-8 rounded-3xl flex flex-col items-center shadow-2xl">
+            <div className="bg-white/5 backdrop-blur-2xl border border-white/10 p-8 rounded-3xl flex flex-col items-center shadow-2xl">
               <h3 className="text-zinc-300 font-bold tracking-widest uppercase text-xs mb-2">Essential</h3>
               <div className="text-4xl font-bold text-white mb-6">$149</div>
               <ul className="text-zinc-500 text-sm space-y-4 mb-8 text-center w-full font-light">
@@ -445,7 +445,7 @@ export default function App() {
             </div>
 
             {/* Price Block 3 */}
-            <div className="bg-black/20 backdrop-blur-2xl border border-white/10 p-8 rounded-3xl flex flex-col items-center shadow-2xl">
+            <div className="bg-white/5 backdrop-blur-2xl border border-white/10 p-8 rounded-3xl flex flex-col items-center shadow-2xl">
               <h3 className="text-zinc-300 font-bold tracking-widest uppercase text-xs mb-2">Audiophile</h3>
               <div className="text-4xl font-bold text-white mb-6">$399</div>
               <ul className="text-zinc-500 text-sm space-y-4 mb-8 text-center w-full font-light">
@@ -509,7 +509,7 @@ export default function App() {
               <motion.div 
                 whileHover={{ x: 6 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-black/20 backdrop-blur-xl hover:bg-white/5 border border-white/10 hover:border-white/20 rounded-2xl p-8 flex items-center justify-between gap-6 transition-all duration-300 cursor-default shadow-xl"
+                className="bg-white/5 backdrop-blur-2xl hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-2xl p-8 flex items-center justify-between gap-6 transition-all duration-300 cursor-default shadow-xl"
               >
                 <div className="flex-1 space-y-4">
                   <p className="text-sm text-zinc-200 font-light leading-relaxed">
@@ -529,7 +529,7 @@ export default function App() {
               <motion.div 
                 whileHover={{ x: 6 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-black/20 backdrop-blur-xl hover:bg-white/5 border border-white/10 hover:border-white/20 rounded-2xl p-8 flex items-center justify-between gap-6 transition-all duration-300 cursor-default shadow-xl"
+                className="bg-white/5 backdrop-blur-2xl hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-2xl p-8 flex items-center justify-between gap-6 transition-all duration-300 cursor-default shadow-xl"
               >
                 <div className="flex-1 space-y-4">
                   <p className="text-sm text-zinc-200 font-light leading-relaxed">
@@ -549,7 +549,7 @@ export default function App() {
               <motion.div 
                 whileHover={{ x: 6 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="bg-black/20 backdrop-blur-xl hover:bg-white/5 border border-white/10 hover:border-white/20 rounded-2xl p-8 flex items-center justify-between gap-6 transition-all duration-300 cursor-default shadow-xl"
+                className="bg-white/5 backdrop-blur-2xl hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-2xl p-8 flex items-center justify-between gap-6 transition-all duration-300 cursor-default shadow-xl"
               >
                 <div className="flex-1 space-y-4">
                   <p className="text-sm text-zinc-200 font-light leading-relaxed">
@@ -573,7 +573,7 @@ export default function App() {
       </section>
 
       {/* FOOTER SECTION */}
-      <footer className="border-t border-white/10 bg-black/30 backdrop-blur-xl py-12 text-zinc-400">
+      <footer className="border-t border-white/10 bg-white/5 backdrop-blur-2xl py-12 text-zinc-400">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between text-xs space-y-4 md:space-y-0">
           <div className="flex items-center space-x-2">
             <span className="font-bold tracking-widest text-zinc-500 uppercase">HAMMER SOUND INC.</span>
