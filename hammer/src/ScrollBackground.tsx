@@ -78,7 +78,7 @@ export default function ScrollBackground() {
   }, []);
   
   return (
-    <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100dvh', zIndex: -1, overflow: 'hidden', backgroundColor: '#000' }}>
+    <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100dvh', zIndex: 0, overflow: 'hidden', backgroundColor: '#000' }}>
       <canvas 
         ref={canvasRef} 
         className="w-full h-full object-cover lg:object-contain"

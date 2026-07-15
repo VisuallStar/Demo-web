@@ -156,6 +156,7 @@ export default function App() {
   return (
     <div id="app-root" className="min-h-screen bg-transparent text-white selection:bg-zinc-800 selection:text-white overflow-x-hidden relative">
       <ScrollBackground />
+      <div className="relative z-10 w-full h-full">
       {/* HEADER SECTION */}
       <header className="border-b border-zinc-900 bg-black/90 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
@@ -585,7 +586,7 @@ export default function App() {
           </div>
         </div>
       </footer>
-
+      </div>
     </div>
   );
 }
