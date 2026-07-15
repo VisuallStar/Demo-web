@@ -38,10 +38,15 @@ export default function ScrollBackground() {
     };
     
     function renderFrame(index: number) {
-      if (images[index - 1] && images[index - 1].complete) {
+      const img = images[index - 1];
+      if (img && img.complete) {
+        if (canvas!.width !== img.width || canvas!.height !== img.height) {
+          canvas!.width = img.width;
+          canvas!.height = img.height;
+        }
         // Clear and draw the new frame
         ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
-        ctx!.drawImage(images[index - 1], 0, 0);
+        ctx!.drawImage(img, 0, 0);
       }
     }
     
@@ -81,7 +86,7 @@ export default function ScrollBackground() {
     <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100dvh', zIndex: 0, overflow: 'hidden', backgroundColor: '#000' }}>
       <canvas 
         ref={canvasRef} 
-        className="w-full h-full object-cover"
+        className="w-full h-full object-contain"
       />
     </div>
   );
