@@ -63,6 +63,7 @@ export default function App() {
   const [activeProfile, setActiveProfile] = useState<SoundProfile>(SOUND_PROFILES[0]);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
   const [activeTab, setActiveTab] = useState<string>("PRODUCTS");
+  const [currentPage, setCurrentPage] = useState<string>("home");
   
   // Audio Visualizer Canvas Setup
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
@@ -155,14 +156,21 @@ export default function App() {
 
   return (
     <div id="app-root" className="min-h-screen bg-transparent text-white selection:bg-zinc-800 selection:text-white overflow-x-hidden relative">
-      <ScrollBackground />
+      {currentPage === "home" && <ScrollBackground />}
+      
+      {(currentPage === "login" || currentPage === "buy") && (
+        <div className="fixed inset-0 z-0">
+          <img src="./background.png" className="w-full h-full object-cover" alt="Background" />
+        </div>
+      )}
+
       <div className="relative z-10 w-full h-full">
       {/* HEADER SECTION */}
       <header className="border-b border-white/10 bg-white/5 backdrop-blur-xl sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           
           {/* Logo */}
-          <div className="flex items-center space-x-3 group cursor-pointer" id="logo-container">
+          <div className="flex items-center space-x-3 group cursor-pointer" onClick={() => setCurrentPage("home")} id="logo-container">
             <div className="w-9 h-9 bg-white text-black rounded flex items-center justify-center font-bold tracking-tighter transition-all duration-300 group-hover:bg-zinc-200">
               H
             </div>
@@ -195,21 +203,24 @@ export default function App() {
           </nav>
 
           {/* Shop Call to Action */}
-          <div>
+          <div className="flex flex-col items-center gap-1.5 w-32">
             <button 
-              onClick={() => {
-                const specSection = document.getElementById("testimonials-section");
-                specSection?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="px-6 py-2.5 bg-white text-black text-xs font-bold tracking-widest uppercase rounded-none hover:bg-zinc-200 transition-all duration-300 active:scale-95"
+              onClick={() => setCurrentPage('buy')}
+              className="px-6 py-2 bg-white text-black text-[10px] font-bold tracking-widest uppercase rounded-none hover:bg-zinc-200 transition-all duration-300 active:scale-95 w-full"
               id="cta-buy-now"
             >
               BUY NOW
             </button>
+            <div className="flex gap-1.5 w-full">
+              <button onClick={() => setCurrentPage('login')} className="flex-1 py-1 bg-white/5 hover:bg-white/10 border border-white/10 text-white text-[8px] font-bold uppercase tracking-wider transition-colors rounded-none">Sign Up</button>
+              <button onClick={() => setCurrentPage('login')} className="flex-1 py-1 bg-white/5 hover:bg-white/10 border border-white/10 text-white text-[8px] font-bold uppercase tracking-wider transition-colors rounded-none">Login</button>
+            </div>
           </div>
         </div>
       </header>
 
+      {currentPage === "home" && (
+        <>
       {/* HERO SECTION - REPLICA OF THE FIRST SLIDE GRID */}
       <main className="max-w-7xl mx-auto px-6 pt-12 pb-24 font-sans min-h-[120vh] flex flex-col justify-center" id="hero-section">
         
@@ -571,6 +582,43 @@ export default function App() {
 
         </div>
       </section>
+      </>
+      )}
+
+      {currentPage === "login" && (
+        <div className="min-h-[85vh] flex items-center justify-center p-6">
+          <div className="bg-white/5 backdrop-blur-2xl border border-white/20 p-10 rounded-2xl w-full max-w-md shadow-2xl flex flex-col space-y-6 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-zinc-500 via-white to-zinc-500"></div>
+            <h2 className="text-2xl font-bold tracking-widest uppercase text-center text-white">Login</h2>
+            <div className="space-y-4">
+              <input type="email" placeholder="Email" className="w-full bg-black/20 border border-white/10 rounded px-4 py-3 text-sm outline-none focus:border-white/40 transition-colors text-white placeholder-zinc-500" />
+              <input type="password" placeholder="Password" className="w-full bg-black/20 border border-white/10 rounded px-4 py-3 text-sm outline-none focus:border-white/40 transition-colors text-white placeholder-zinc-500" />
+            </div>
+            <button className="w-full bg-white text-black font-bold tracking-widest uppercase text-sm py-3 hover:bg-zinc-200 transition-colors rounded">Sign In</button>
+            <p className="text-xs text-center text-zinc-400">Don't have an account? <span className="text-white cursor-pointer hover:underline">Sign up</span></p>
+          </div>
+        </div>
+      )}
+
+      {currentPage === "buy" && (
+        <div className="min-h-[85vh] flex flex-col items-center justify-center p-6 text-center space-y-8">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight uppercase">Checkout</h1>
+          <p className="text-zinc-400 font-light max-w-md">Complete your purchase. Secure, simple, and beautifully minimalist.</p>
+          <div className="w-full max-w-lg bg-white/5 backdrop-blur-2xl border border-white/10 p-8 flex flex-col space-y-4 shadow-2xl rounded-2xl text-left relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-zinc-500 via-white to-zinc-500"></div>
+            <div className="flex justify-between items-center border-b border-white/10 pb-4 mb-4">
+                <span className="text-zinc-300 tracking-widest uppercase text-sm">Hammer Pro</span>
+                <span className="font-bold text-xl text-white">$399</span>
+            </div>
+            <div className="space-y-3">
+              <input type="text" placeholder="Full Name" className="w-full bg-black/20 border border-white/10 rounded px-4 py-3 text-sm outline-none focus:border-white/40 transition-colors text-white placeholder-zinc-500" />
+              <input type="email" placeholder="Email Address" className="w-full bg-black/20 border border-white/10 rounded px-4 py-3 text-sm outline-none focus:border-white/40 transition-colors text-white placeholder-zinc-500" />
+              <input type="text" placeholder="Card Number" className="w-full bg-black/20 border border-white/10 rounded px-4 py-3 text-sm outline-none focus:border-white/40 transition-colors text-white placeholder-zinc-500" />
+            </div>
+            <button className="w-full bg-white text-black font-bold tracking-widest uppercase text-sm py-4 hover:bg-zinc-200 transition-colors rounded mt-6">Confirm Purchase</button>
+          </div>
+        </div>
+      )}
 
       {/* FOOTER SECTION */}
       <footer className="border-t border-white/10 bg-white/5 backdrop-blur-2xl py-12 text-zinc-400">
