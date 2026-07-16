@@ -1,0 +1,1 @@
+Add singn up and login button below buy now button whenever user clicks to it user get redirected to the login page with followed background /root/Downloads/web style/prompt.md the login card will be in transparent blur box. Make the buying screen with given background with minimalist ux and elements without product image 

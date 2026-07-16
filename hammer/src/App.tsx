@@ -69,11 +69,18 @@ export default function App() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationFrameRef = useRef<number | null>(null);
   const phaseRef = useRef<number>(0);
+  // Use refs for values needed in the render loop to avoid recreating the loop
+  const activeProfileRef = useRef(activeProfile);
+  const isPlayingRef = useRef(isPlaying);
+  
+  // Keep refs in sync with state
+  useEffect(() => { activeProfileRef.current = activeProfile; }, [activeProfile]);
+  useEffect(() => { isPlayingRef.current = isPlaying; }, [isPlaying]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: false });
     if (!ctx) return;
 
     let width = canvas.width = canvas.offsetWidth;
@@ -85,13 +92,18 @@ export default function App() {
       height = canvas.height = canvas.offsetHeight;
     };
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize, { passive: true });
 
     const render = () => {
-      ctx.clearRect(0, 0, width, height);
+      const profile = activeProfileRef.current;
+      const playing = isPlayingRef.current;
+      
+      // Fill black instead of clearRect (faster with alpha:false)
+      ctx.fillStyle = "#000000";
+      ctx.fillRect(0, 0, width, height);
 
-      if (isPlaying) {
-        phaseRef.current += activeProfile.speed;
+      if (playing) {
+        phaseRef.current += profile.speed;
       }
 
       // Draw mathematical waves representing acoustic signals
@@ -102,16 +114,17 @@ export default function App() {
         
         // Blend colors subtly
         ctx.strokeStyle = i === 0 
-          ? activeProfile.color 
-          : `${activeProfile.color}${i === 1 ? "66" : "22"}`;
+          ? profile.color 
+          : `${profile.color}${i === 1 ? "66" : "22"}`;
 
-        const currentAmplitude = isPlaying 
-          ? activeProfile.amplitude * (1 - i * 0.25)
+        const currentAmplitude = playing 
+          ? profile.amplitude * (1 - i * 0.25)
           : 2; // flat line if paused with subtle micro-vibration
 
-        const currentFrequency = activeProfile.frequency * (1 + i * 0.2);
+        const currentFrequency = profile.frequency * (1 + i * 0.2);
 
-        for (let x = 0; x < width; x++) {
+        // Step by 2px instead of 1px — halves draw calls with no visible difference
+        for (let x = 0; x < width; x += 2) {
           // Soften the wave at the boundaries to prevent clipping visual artifacts
           const boundaryFade = Math.sin((x / width) * Math.PI);
           const y = (height / 2) + 
@@ -152,7 +165,8 @@ export default function App() {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [activeProfile, isPlaying]);
+  }, []); // Stable loop — reads from refs, no teardown/recreation
+
 
   return (
     <div id="app-root" className="min-h-screen bg-transparent text-white selection:bg-zinc-800 selection:text-white overflow-x-hidden relative">

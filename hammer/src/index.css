@@ -5,7 +5,59 @@
   --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
 }
 
+/* ===== PERFORMANCE OPTIMIZATIONS ===== */
+
+html {
+  scroll-behavior: smooth;
+  /* Enable GPU compositing for the entire page */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 body {
   background-color: #000000;
   color: #ffffff;
 }
+
+/* GPU-accelerate heavy backdrop-blur elements */
+header,
+footer,
+[class*="backdrop-blur"] {
+  will-change: transform;
+  contain: layout style;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Contain layout thrash within sections */
+section {
+  contain: layout style;
+}
+
+/* Force GPU layer for the waveform canvas container */
+canvas {
+  image-rendering: auto;
+  will-change: contents;
+}
+
+/* Optimize transitions: only animate transform + opacity, not 'all' */
+button,
+a,
+input {
+  transition-property: color, background-color, border-color, opacity, transform, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
